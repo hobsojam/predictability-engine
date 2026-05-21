@@ -6,9 +6,9 @@ source 'https://rubygems.org'
 gemspec
 
 # Internal cbp-org gems — only available in local dev and internal CI.
-# Public GitHub Actions workflows skip this group with BUNDLE_WITHOUT=internal_ci
-# while keeping Gemfile and Gemfile.lock dependency resolution stable.
-group :internal_ci do
+# GitHub Actions workflows set JIRA_ENV=gha; this block is skipped there
+# so the source never enters Bundler's resolution path.
+unless ENV['JIRA_ENV'] == 'gha'
   source 'https://gems.cbp-org.internal' do
     gem 'badge-service-cli'
   end
