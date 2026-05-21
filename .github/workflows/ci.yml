@@ -15,7 +15,6 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  BUNDLE_WITHOUT: internal_ci
   CUCUMBER_PUBLISH_QUIET: "true"
   JIRA_ENV: gha
 

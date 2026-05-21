@@ -1,4 +1,5 @@
 node_modules/
+vendor/bundle/
 reports/
 !data/samples/reports/
 tmp/
