@@ -3,6 +3,15 @@ description: 'Configure Ruby with bundler cache, install Node dependencies, and 
 runs:
   using: composite
   steps:
+    - name: Strip internal gem source from lockfile
+      shell: bash
+      run: |
+        ruby -e '
+          content = File.read("Gemfile.lock")
+          content.gsub!(/^GEM\n  remote: https:\/\/gems\.cbp-org\.internal\/\n  specs:\n(?:[ \t]+[^\n]+\n)*\n/, "")
+          content.gsub!(/^ {2}badge-service-cli[^\n]*\n/, "")
+          File.write("Gemfile.lock", content)
+        '
     - uses: ruby/setup-ruby@v1
       with:
         bundler-cache: true
